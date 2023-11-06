@@ -1,0 +1,35 @@
+{% macro render_table(my_list, n) %}
+    <table>
+        <tr>
+            {% for item in my_list[0] %}
+                <th>{{item}}</th>
+            {% endfor %}
+        </tr>
+        {% if get_length(my_list) <= n %}
+            {% for item in my_list %}
+                <tr>
+                    {% for key in item %}
+                        <td>{{item[key]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            {% set divided_n = round_num(n / 2) %}
+            {% for index in range(0, divided_n) %}
+                <tr>
+                    {% for key in my_list[index] %}
+                        <td>{{my_list[index][key]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            <tr><td colspan="3">.............</td></tr>
+            {% for index in range(get_length(my_list) - (n - divided_n), get_length(my_list)) %}
+                <tr>
+                    {% for key in my_list[::-1][index] %}
+                        <td>{{my_list[index][key]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+{% endmacro %}

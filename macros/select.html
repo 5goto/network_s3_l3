@@ -1,0 +1,11 @@
+{% macro render_select(name, my_dict, key) %}
+   <select name='{{name}}'>
+      {% for item in my_dict %}
+       {% if item == key %}
+      <option value='{{item}}' selected>{{my_dict[item]}}</option>
+       {% else %}
+       <option value='{{item}}'>{{my_dict[item]}}</option>
+       {% endif %}
+       {% endfor %}
+   </select>
+{% endmacro %}
